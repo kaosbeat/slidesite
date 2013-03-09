@@ -36,7 +36,11 @@
 path = require 'path'
 http = require 'http'
 fs   = require 'fs'
-db = require('dirty')('kaotec.db')
+nStore = require 'nstore'
+nStore = nStore.extend(require('nstore/query')())
+db = nStore.new 'kaotec.json', ()->
+  console.log("db is loaded")
+
 
 
 # # Setup MIME support.
@@ -147,16 +151,18 @@ request_handler = (request,response)->
       else if request.url.split('/')[1] == "db"
         dbcommand = request.url.split('/')
         console.log('do something dirty' + dbcommand[3])
-        console.log(db.path)
         if dbcommand[2]='set'
-          temp = db.get dbcommand[3]
-          db.set dbcommand[3],
-            dbcommand[4], dbcommand[5]
-            # dbcommand[4]: "\""+dbcommand[5]+"\""
-          # db.forEach (key, value) ->
-          #   console.log "Found key: #{key}, val: %j", value
-
-
+        #   # temp = db.get dbcommand[3]
+          db.save dbcommand[3],
+            eyes: dbcommand[5]
+          ,(err) ->
+            throw err if err
+        #     # dbcommand[4]: "\""+dbcommand[5]+"\""
+        #   # db.forEach (key, value) ->
+        #   #   console.log "Found key: #{key}, val: %j", value
+        if dbcommand[2]='get'
+          db.find "brand":"kaosbeat",(err,results)->
+            console.log results
       else
         respond request, response, 404
 
@@ -172,9 +178,13 @@ request_handler = (request,response)->
 # # `server` is the HTTP server itself. with sockets enabled
 server = http.createServer request_handler
 # io = require('socket.io').listen(server)
-db.on "load", ->    
-    db.forEach (key, value) ->
-      console.log "Found key: #{key}, val: %j", value
+# db.on "load", ->    
+
+# db.find
+#   eyes: "purple", (err, results)->
+#   console.log "blaqh"
+#     db.forEach (key, value) ->
+#       console.log "Found key: #{key}, val: %j", value
 server.listen options.port, options.host,()->
   options.silent || console.log "Server listening at http://#{options.host}:#{options.port}/"
   
