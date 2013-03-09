@@ -11,17 +11,11 @@ html(lang="en")
 		link(rel='stylesheet', href='/css/kaotec.css')
 		link#theme(rel='stylesheet', href='/css/theme/kaotec.css')
 	body
-		#container
-			each item in locals
-				li #{item.title}
-			else
-				p Get on it!
 		.reveal
 			.slides
-				section
-					h1 "hello"
-				section
-					h2 "world"	
+				each item in locals
+					section
+						h1 #{item.title}
 
 		script(src='/lib/js/head.min.js')
 		script(src='/lib/js/d3.v3.min.js')
