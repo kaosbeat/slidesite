@@ -1,0 +1,15 @@
+doctype 5
+html(lang="en")
+	head
+	title "locals"
+	script(type='text/javascript')
+		if (locals) {
+			console.log(locals)
+		}
+	body
+		h1 Jade - node template engine
+		#container
+		each item in locals
+			li #{item.title}
+		else
+			p Get on it!
