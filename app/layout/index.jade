@@ -1,15 +1,15 @@
 doctype 5
 html(lang="en")
 	head
+		title 'kaotec'
 		meta(charset='utf-8')
-			title 'kaotec'
-			meta(name='description', content='dynamic portfolio version 0.1')
-			meta(name='author', content='Kasper Jordaens')
-			meta(name='apple-mobile-web-app-capable', content='yes')
-			meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
-			link(rel='stylesheet', href='css/reveal.css')
-			link(rel='stylesheet', href='css/kaotec.css')
-			link#theme(rel='stylesheet', href='css/theme/kaotec.css')
+		meta(name='description', content='dynamic portfolio version 0.1')
+		meta(name='author', content='Kasper Jordaens')
+		meta(name='apple-mobile-web-app-capable', content='yes')
+		meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
+		link(rel='stylesheet', href='/css/reveal.css')
+		link(rel='stylesheet', href='/css/kaotec.css')
+		link#theme(rel='stylesheet', href='/css/theme/kaotec.css')
 	body
 		#container
 			each item in locals
@@ -18,11 +18,16 @@ html(lang="en")
 				p Get on it!
 		.reveal
 			.slides
+				section
+					h1 "hello"
+				section
+					h2 "world"	
+
 		script(src='/lib/js/head.min.js')
 		script(src='/lib/js/d3.v3.min.js')
-		script(src='/js/reveal.min.js')
+		script(src='/js/reveal.js')
 		script(src='/lib/js/jquery-1.9.1.min.js')
-		script(src='/js/superminds2.js')
+		script(src='/js/s.js')
 		script
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration
