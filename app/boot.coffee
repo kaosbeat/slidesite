@@ -36,7 +36,7 @@
 path = require 'path'
 http = require 'http'
 fs   = require 'fs'
-dirty = require 'dirty'
+db = require('dirty')('kaotec.db')
 
 
 # # Setup MIME support.
@@ -145,7 +145,18 @@ request_handler = (request,response)->
             else
               serve_file request,response, requestpath
       else if request.url.split('/')[1] == "db"
-        console.log('do something dirty')    
+        dbcommand = request.url.split('/')
+        console.log('do something dirty' + dbcommand[3])
+        console.log(db.path)
+        if dbcommand[2]='set'
+          temp = db.get dbcommand[3]
+          db.set dbcommand[3],
+            dbcommand[4], dbcommand[5]
+            # dbcommand[4]: "\""+dbcommand[5]+"\""
+          # db.forEach (key, value) ->
+          #   console.log "Found key: #{key}, val: %j", value
+
+
       else
         respond request, response, 404
 
@@ -161,6 +172,10 @@ request_handler = (request,response)->
 # # `server` is the HTTP server itself. with sockets enabled
 server = http.createServer request_handler
 # io = require('socket.io').listen(server)
+db.on "load", ->    
+    db.forEach (key, value) ->
+      console.log "Found key: #{key}, val: %j", value
 server.listen options.port, options.host,()->
   options.silent || console.log "Server listening at http://#{options.host}:#{options.port}/"
+  
   
