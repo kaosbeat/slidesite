@@ -1,15 +1,50 @@
 doctype 5
 html(lang="en")
 	head
-	title "locals"
-	script(type='text/javascript')
-		if (locals) {
-			console.log(locals)
-		}
+		meta(charset='utf-8')
+			title 'kaotec'
+			meta(name='description', content='dynamic portfolio version 0.1')
+			meta(name='author', content='Kasper Jordaens')
+			meta(name='apple-mobile-web-app-capable', content='yes')
+			meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
+			link(rel='stylesheet', href='css/reveal.css')
+			link(rel='stylesheet', href='css/kaotec.css')
+			link#theme(rel='stylesheet', href='css/theme/kaotec.css')
 	body
-		h1 Jade - node template engine
 		#container
-		each item in locals
-			li #{item.title}
-		else
-			p Get on it!
+			each item in locals
+				li #{item.title}
+			else
+				p Get on it!
+		.reveal
+			.slides
+		script(src='/lib/js/head.min.js')
+		script(src='/lib/js/d3.v3.min.js')
+		script(src='/js/reveal.min.js')
+		script(src='/lib/js/jquery-1.9.1.min.js')
+		script(src='/js/superminds2.js')
+		script
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+			controls: false,
+			progress: true,
+			history: true,
+			center: true,
+			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+			transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+			// Optional libraries used to extend on reveal.js
+			dependencies: [
+			// { src: '/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			// { src: '/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			// { src: '/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			// { src: '/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			// { src: '/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+			// { src: '/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+			// { src: '/socket.io/socket.io.js', async: true },
+			// { src: '/plugin/notes-server/client.js', async: true },
+			// { src: '/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+			]
+			});
+
+

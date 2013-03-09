@@ -40,7 +40,6 @@ nStore = require 'nstore'
 nStore = nStore.extend(require('nstore/query')())
 db = nStore.new 'kaotec.json', ()->
   console.log("db is loaded")
-# Haml = require 'haml'
 jade = require 'jade'
 
 
@@ -164,9 +163,13 @@ request_handler = (request,response)->
         #   # db.forEach (key, value) ->
         #   #   console.log "Found key: #{key}, val: %j", value
         if dbcommand[2]='get'
-          db.find "brand":"kaosbeat",(err,results)->
-            render_jade request, response, "index", results
-            # console.log results
+          if dbcommand[3] = 'brand'
+            # obj = dbcommand[4]:dbcommand[3]
+            # console.log obj  
+            db.find brand: dbcommand[4], (err,results)->
+              console.log results
+              render_jade request, response, "index", results
+              
       else
         respond request, response, 404
 
@@ -175,31 +178,9 @@ request_handler = (request,response)->
   #     hello: "world"
 
 
-# render_haml = (request, response, file, data)->
 render_jade = (request, response, file, data)->
   layout = jade.compile(fs.readFileSync('layout/'+file+'.jade', 'utf8'))
-  console.log layout
   html = layout data
-  # data = 
-  #   bert: 
-  #     brand: 'kaosbeat',
-  #     title: 'redsynth',
-  #     year: 2007,
-  #     tags: 'synth,555,arduino',
-  #     img: 'redsynth1.jpg,redsynth2.jpg,redsynth3.jpg',
-  #     status: 'broken'
-  #   robs: 
-  #     brand: 'kaosbeat',
-  #     title: 'ballsynth',
-  #     year: 2008,
-  #     tags: 'synth,custom',
-  #     img: 'ballsynth1.jpg',
-  #     status: 'broken'
-  hdata = 
-    title: "Hello Node",
-    contents: "<h1>Hello World</h1>"
-  console.log data
-  # html = Haml.render(haml, locals: data)
   respond request, response, 200, html
 
 
