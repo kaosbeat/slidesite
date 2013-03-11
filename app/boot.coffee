@@ -167,7 +167,6 @@ request_handler = (request,response)->
             obj[dbcommand[3]] = dbcommand[4]
             db.find obj, (err,results)->
             # db.find brand: ashrae,
-              #console.log results
               render_jade request, response, "index", results
               
       else
@@ -180,8 +179,8 @@ request_handler = (request,response)->
 
 render_jade = (request, response, file, data)->
   #console.log typeof data
-  for item in data
-     console.log "logging stuff" +item.title
+  # for item in data
+     # console.log "logging stuff" +item.title
    
   layout = jade.compile(fs.readFileSync('layout/'+file+'.jade', 'utf8'))
   html = layout data

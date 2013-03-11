@@ -1,4 +1,4 @@
-bert	{"brand":"kaosbeat","title":"redsynth","year":2007,"tags":"synth,555,arduino","img":"drossglop","status":"broken"}
+bert	{"brand":"kaosbeat","title":"redsynth","year":2007,"tags":"synth,555,arduino","img":["drossglop","psk"],"status":"broken"}
 robs	{"brand":"kaosbeat","title":"ballsynth","year":2008,"tags":"synth,custom","img":"fuckwave.png", "status":"broken"}
 kats	{"brand":"kaotec","title":"London Calling","year":2011,"tags":"buurtwerk,affiche","img":"londoncalling.jpg", "status":"done"}
 dogs	{"brand":"ashrae","title":"NetGlitch","year":2007,"tags":"sfx,installation","img":"netglitch.jpg", "status":"done", "description":"great project witch @0xtosh"}
