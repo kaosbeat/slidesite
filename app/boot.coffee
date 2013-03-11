@@ -153,21 +153,21 @@ request_handler = (request,response)->
       else if request.url.split('/')[1] == "db"
         dbcommand = request.url.split('/')
         console.log('do something dirty' + dbcommand[3])
-        if dbcommand[2]='set'
-        #   # temp = db.get dbcommand[3]
-          db.save dbcommand[3],
-            eyes: dbcommand[5]
-          ,(err) ->
-            throw err if err
+        # if dbcommand[2]='set'
+        #   db.save dbcommand[3],
+        #     eyes: dbcommand[5]
+        #   ,(err) ->
+        # throw err if err
         #     # dbcommand[4]: "\""+dbcommand[5]+"\""
         #   # db.forEach (key, value) ->
         #   #   console.log "Found key: #{key}, val: %j", value
         if dbcommand[2]='get'
           if dbcommand[3] = 'brand'
-            # obj = dbcommand[4]:dbcommand[3]
-            # console.log obj  
-            db.find brand: dbcommand[4], (err,results)->
-              console.log results
+            obj = {}
+            obj[dbcommand[3]] = dbcommand[4]
+            db.find obj, (err,results)->
+            # db.find brand: ashrae,
+              #console.log results
               render_jade request, response, "index", results
               
       else
@@ -179,6 +179,10 @@ request_handler = (request,response)->
 
 
 render_jade = (request, response, file, data)->
+  #console.log typeof data
+  for item in data
+     console.log "logging stuff" +item.title
+   
   layout = jade.compile(fs.readFileSync('layout/'+file+'.jade', 'utf8'))
   html = layout data
   respond request, response, 200, html
