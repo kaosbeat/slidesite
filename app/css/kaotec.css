@@ -1,3 +1,12 @@
+.stack {
+/*    background-color: red;
+    z-index: 222;
+    height:1000px;*/
+}
+.backimg {
+    -webkit-transform: translate3d(0%, 0%,-500px);
+}
+
 #d3container {
     position:absolute;
     top:0px;

@@ -14,7 +14,8 @@ html(lang="en")
 		.reveal
 			.slides
 				each item in locals
-					section.stack 
+					section.stack
+						img.backimg(src="/img/#{item.img[0]}")
 						each slide in item.img
 							section
 								h1 #{item.title}
